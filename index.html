@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Kruengkao Link</title>
+<style>
+  :root {
+    --bg: #101014;
+    --card: #1a1a20;
+    --text: #f2f0ec;
+    --muted: #8b8a94;
+    --accent: #e8b64c;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, "Segoe UI", "Noto Sans Thai", "Sarabun", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+  .card {
+    background: var(--card);
+    border: 1px solid #2a2a32;
+    border-radius: 14px;
+    padding: 36px 32px;
+    max-width: 480px;
+    width: 100%;
+    text-align: center;
+  }
+  .logo {
+    font-size: 13px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 18px;
+  }
+  h1 { font-size: 20px; font-weight: 600; margin-bottom: 10px; }
+  p { font-size: 15px; color: var(--muted); line-height: 1.6; }
+  .spinner {
+    width: 28px; height: 28px;
+    border: 3px solid #2a2a32;
+    border-top-color: var(--accent);
+    border-radius: 50%;
+    margin: 0 auto 20px;
+    animation: spin 0.8s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  @media (prefers-reduced-motion: reduce) { .spinner { animation: none; } }
+  .list {
+    text-align: left;
+    margin-top: 20px;
+    border-top: 1px solid #2a2a32;
+    padding-top: 16px;
+  }
+  .list a {
+    display: block;
+    color: var(--text);
+    text-decoration: none;
+    padding: 10px 12px;
+    border-radius: 8px;
+    font-size: 15px;
+  }
+  .list a:hover, .list a:focus-visible { background: #24242c; outline: none; }
+  .list a span { color: var(--muted); font-size: 13px; margin-left: 8px; }
+  .err { color: #e07a6a; }
+  a.plain { color: var(--accent); }
+</style>
+</head>
+<body>
+<div class="card" id="card">
+  <div class="logo">Kruengkao</div>
+  <div class="spinner" id="spinner"></div>
+  <h1 id="title">กำลังพาไปยังหน้าปลายทาง…</h1>
+  <p id="msg">กรุณารอสักครู่</p>
+</div>
+
+<script>
+(async function () {
+  const $ = (id) => document.getElementById(id);
+  const slug = decodeURIComponent(location.hash.replace(/^#\/?/, "")).trim();
+
+  let links = {};
+  try {
+    // cache-buster กันเจอไฟล์เก่าหลังแก้ links.json
+    const res = await fetch("links.json?v=" + Date.now(), { cache: "no-store" });
+    if (!res.ok) throw new Error("HTTP " + res.status);
+    links = await res.json();
+  } catch (e) {
+    $("spinner").style.display = "none";
+    $("title").textContent = "โหลดข้อมูลลิงก์ไม่สำเร็จ";
+    $("title").className = "err";
+    $("msg").textContent = "ตรวจสอบว่าไฟล์ links.json อยู่ในโฟลเดอร์เดียวกับหน้านี้ และเป็น JSON ที่ถูกต้อง";
+    return;
+  }
+
+  // ไม่มี slug → แสดงรายการลิงก์ทั้งหมด (ข้าม key ที่ขึ้นต้นด้วย _)
+  if (!slug) {
+    $("spinner").style.display = "none";
+    $("title").textContent = "ลิงก์ทั้งหมด";
+    $("msg").textContent = "เลือกปลายทางที่ต้องการ";
+    const list = document.createElement("div");
+    list.className = "list";
+    Object.keys(links)
+      .filter((k) => !k.startsWith("_"))
+      .sort()
+      .forEach((k) => {
+        const a = document.createElement("a");
+        a.href = "#" + k;
+        a.textContent = k;
+        const hint = document.createElement("span");
+        try { hint.textContent = new URL(links[k]).hostname; } catch (e) {}
+        a.appendChild(hint);
+        a.onclick = () => setTimeout(() => location.reload(), 50);
+        list.appendChild(a);
+      });
+    $("card").appendChild(list);
+    return;
+  }
+
+  const dest = links[slug];
+
+  // ป้องกันปลายทางแปลกๆ อนุญาตเฉพาะ http/https
+  const isSafe = typeof dest === "string" && /^https?:\/\//i.test(dest);
+
+  if (isSafe) {
+    $("msg").textContent = "กำลังไปที่ " + new URL(dest).hostname;
+    location.replace(dest);
+  } else {
+    $("spinner").style.display = "none";
+    $("title").textContent = "ไม่พบลิงก์ \u201C" + slug + "\u201D";
+    $("title").className = "err";
+    $("msg").innerHTML =
+      'ลิงก์นี้อาจถูกลบหรือพิมพ์ผิด — <a class="plain" href="#">ดูลิงก์ทั้งหมด</a>';
+    $("msg").querySelector("a").onclick = (ev) => {
+      ev.preventDefault();
+      location.hash = "";
+      location.reload();
+    };
+  }
+})();
+</script>
+</body>
+</html>

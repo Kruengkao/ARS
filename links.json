@@ -1,0 +1,7 @@
+{
+  "_comment": "แก้ไฟล์นี้ไฟล์เดียวเพื่อเพิ่ม/ลบ/เปลี่ยนลิงก์ | รูปแบบ: \"ชื่อสั้น\": \"URL ปลายทาง\" | ชื่อสั้นใช้ a-z, 0-9, ขีดกลาง (-) เท่านั้น",
+  "demo": "https://www.google.com",
+  "dashboard": "https://script.google.com/macros/s/ใส่-URL-ของ-Apps-Script/exec",
+  "approval": "https://script.google.com/macros/s/ใส่-URL-ของระบบขออนุมัติ/exec",
+  "promo": "https://docs.google.com/spreadsheets/d/ใส่-ID-ของชีท/edit"
+}
