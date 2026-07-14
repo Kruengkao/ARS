@@ -1,6 +1,6 @@
 {
   "_comment": "แก้ไฟล์นี้ไฟล์เดียวเพื่อเพิ่ม/ลบ/เปลี่ยนลิงก์ | รูปแบบ: \"ชื่อสั้น\": \"URL ปลายทาง\" | ชื่อสั้นใช้ a-z, 0-9, ขีดกลาง (-) เท่านั้น",
   "approval": "https://script.google.com/a/macros/kruengkao.com/s/AKfycbyPe6bNvfbp8-4w-LgXh7gMU2x7iga7Z-rxYez2aJCu_dE_SBx2wZf_8PdJczAx7jAIfg/exec",
-  "ฺmeetingbooking": "https://script.google.com/macros/s/AKfycbw7_lxhBJhlSCUk8AG8jXYOAPCVedmOWtGGAdGegk9O6WjgahrEOafF7E4lhYpdKPHi/exec",
+  "meetingbooking": "https://script.google.com/macros/s/AKfycbw7_lxhBJhlSCUk8AG8jXYOAPCVedmOWtGGAdGegk9O6WjgahrEOafF7E4lhYpdKPHi/exec",
   "promo"   : "https://docs.google.com/spreadsheets/d/1Ay257IR5HUNDt4YMDVE1YdaE91vXjpMCKj6xmts56js/edit?gid=382918769#gid=382918769"
 }
