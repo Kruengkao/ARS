@@ -2,5 +2,6 @@
   "_comment": "แก้ไฟล์นี้ไฟล์เดียวเพื่อเพิ่ม/ลบ/เปลี่ยนลิงก์ | รูปแบบ: \"ชื่อสั้น\": \"URL ปลายทาง\" | ชื่อสั้นใช้ a-z, 0-9, ขีดกลาง (-) เท่านั้น",
   "approval": "https://script.google.com/a/macros/kruengkao.com/s/AKfycby7n1BzfvNpu3QOtxI-0ldmA9vInRwu7f7EE8cBfOC23ZvBXMC7Ql3675s8PiGiBWlV8A/exec",
   "meetingbooking": "https://script.google.com/macros/s/AKfycbw7_lxhBJhlSCUk8AG8jXYOAPCVedmOWtGGAdGegk9O6WjgahrEOafF7E4lhYpdKPHi/exec",
-  "SALESDASHBOARD": "https://script.google.com/a/macros/kruengkao.com/s/AKfycbxJTFEi6DJRyW7l8l4tKGin0yeEz5_tFBPRkuLK6Ap7YSe6TBZ7xMiwJQAlkaacKwo1tg/exec"
+  "SALESDASHBOARD": "https://script.google.com/a/macros/kruengkao.com/s/AKfycbxJTFEi6DJRyW7l8l4tKGin0yeEz5_tFBPRkuLK6Ap7YSe6TBZ7xMiwJQAlkaacKwo1tg/exec",
+  "ArtistAudience": "https://script.google.com/a/macros/kruengkao.com/s/AKfycbwjzW8A79ER6X_GmliHPni6DKKAp1wy1X1aLC53oSN3TT5mq3dOOPiKVf3agAVQ3aWe/exec?edit"
 }
